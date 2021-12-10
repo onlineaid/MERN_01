@@ -4,7 +4,6 @@ const colors = require ('colors');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const  { notFound, errorHandler } = require('./middleware/errorMiddleware')
-
 const connectDB = require('./config/db')
 
 
@@ -32,9 +31,11 @@ app.use('/api/upload', uploadRoutes)
 
 app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID))
 
-const upload = path.resolve()
-app.use('uploads', express.static(path.join(upload, '/uploads')))
+// const upload = path.resolve()
+// app.use('uploads', express.static(path.join(upload, '/uploads')))
 
+let dirname = path.resolve()
+app.use('/uploads', express.static(path.join(dirname, '/uploads')))
 
 if (process.env.NODE_ENV === 'PRODUCTION') {
     app.use(express.static(path.join(__dirname, '../frontend/build')))
