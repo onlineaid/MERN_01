@@ -8,6 +8,8 @@ import { logout } from '../actions/userActions'
 const Header = () => {
     const dispatch = useDispatch()
     const userLogin = useSelector(state => state.userLogin)
+    const {cartItems} = useSelector(state => state.cart)
+
     const { userInfo } = userLogin
 
     const logoutHandler = () => {
@@ -16,7 +18,7 @@ const Header = () => {
 
     return (
         <header>
-           <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
+            <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
                 <Container>
                     <LinkContainer to='/'>
                         <Navbar.Brand>ProShop</Navbar.Brand>
@@ -26,7 +28,7 @@ const Header = () => {
                         <SearchBox />
                         <Nav className="ml-auto">
                             <LinkContainer to='/cart'>
-                                <Nav.Link><i className='fas fa-shopping-cart'></i>{' '}Cart</Nav.Link>
+                                <Nav.Link><i className='fas fa-shopping-cart'></i>{cartItems.length}Cart</Nav.Link>
                             </LinkContainer>
                             {userInfo ? (
                                 <NavDropdown title={userInfo.name} id='username'>
